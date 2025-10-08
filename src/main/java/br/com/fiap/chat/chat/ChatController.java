@@ -18,12 +18,19 @@ public class ChatController {
         this.chatMessageReceiver = chatMessageReceiver;
     }
 
+    @GetMapping("/chat")
+    public String chatPage(Model model) {
+        model.addAttribute("messages", chatMessageReceiver.getMessages());
+        return "chat";
+    }
+
     @PostMapping("/send")
-    public String sendMessage(String username, String message,String gender, RedirectAttributes redirect) {
+    public String sendMessage(@RequestParam String username,
+                              @RequestParam String message,
+                              RedirectAttributes redirect) {
         String formattedMessage = username + ": " + message;
         chatMessageSender.sendMessage(formattedMessage);
         redirect.addFlashAttribute("username", username);
-        redirect.addFlashAttribute("gender", gender);
         return "redirect:/chat";
     }
 }
