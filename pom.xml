@@ -72,6 +72,22 @@
 
     <build>
         <plugins>
+
+            <!-- Plugin essencial para gerar o jar executável do Spring Boot -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.3.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- (Opcional) Apaga o .jar.original após o empacotamento -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
@@ -90,7 +106,9 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
+
 
 </project>
